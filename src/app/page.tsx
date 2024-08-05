@@ -9,6 +9,7 @@ import {
   CarouselNext,
 } from "@/components/ui/carousel";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import Image from "next/image";
 
 export default function Component() {
   return (
@@ -61,7 +62,7 @@ export default function Component() {
               <CarouselItem className="md:basis-1/2 lg:basis-1/3">
                 <div className="p-4">
                   <Card>
-                    <img
+                    <Image
                       src="/placeholder.svg"
                       width={400}
                       height={250}
@@ -87,7 +88,7 @@ export default function Component() {
               <CarouselItem className="md:basis-1/2 lg:basis-1/3">
                 <div className="p-4">
                   <Card>
-                    <img
+                    <Image
                       src="/placeholder.svg"
                       width={400}
                       height={250}
@@ -113,7 +114,7 @@ export default function Component() {
               <CarouselItem className="md:basis-1/2 lg:basis-1/3">
                 <div className="p-4">
                   <Card>
-                    <img
+                    <Image
                       src="/placeholder.svg"
                       width={400}
                       height={250}
@@ -145,7 +146,7 @@ export default function Component() {
           <h2 className="text-3xl font-bold mb-8">Popular Neighborhoods</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             <Card>
-              <img
+              <Image
                 src="/placeholder.svg"
                 width={400}
                 height={250}
@@ -161,7 +162,7 @@ export default function Component() {
               </CardContent>
             </Card>
             <Card>
-              <img
+              <Image
                 src="/placeholder.svg"
                 width={400}
                 height={250}
@@ -177,7 +178,7 @@ export default function Component() {
               </CardContent>
             </Card>
             <Card>
-              <img
+              <Image
                 src="/placeholder.svg"
                 width={400}
                 height={250}
@@ -208,7 +209,7 @@ export default function Component() {
               <Button>Learn More</Button>
             </div>
             <div>
-              <img
+              <Image
                 src="/placeholder.svg"
                 width={600}
                 height={400}
