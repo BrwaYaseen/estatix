@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -14,32 +13,6 @@ import Image from "next/image";
 export default function Component() {
   return (
     <div className="flex flex-col min-h-[100dvh]">
-      <header className="bg-primary text-primary-foreground py-4 px-6 flex items-center justify-between">
-        <Link href="#" className="text-xl font-bold" prefetch={false}>
-          Real Estate
-        </Link>
-        <nav className="hidden md:flex items-center space-x-6">
-          <Link href="#" className="hover:underline" prefetch={false}>
-            Buy
-          </Link>
-          <Link href="#" className="hover:underline" prefetch={false}>
-            Rent
-          </Link>
-          <Link href="#" className="hover:underline" prefetch={false}>
-            Sell
-          </Link>
-          <Link href="#" className="hover:underline" prefetch={false}>
-            About
-          </Link>
-          <Link href="#" className="hover:underline" prefetch={false}>
-            Contact
-          </Link>
-        </nav>
-        <Button variant="outline" size="sm" className="md:hidden">
-          <MenuIcon className="h-6 w-6" />
-          <span className="sr-only">Toggle navigation</span>
-        </Button>
-      </header>
       <main className="flex-1">
         <section className="bg-[url('/hero-image.jpg')] bg-cover bg-center h-[60vh] flex flex-col items-center justify-center text-white">
           <h1 className="text-4xl font-bold mb-4">Find Your Dream Home</h1>
@@ -222,26 +195,5 @@ export default function Component() {
         </section>
       </main>
     </div>
-  );
-}
-
-function MenuIcon(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <line x1="4" x2="20" y1="12" y2="12" />
-      <line x1="4" x2="20" y1="6" y2="6" />
-      <line x1="4" x2="20" y1="18" y2="18" />
-    </svg>
   );
 }
