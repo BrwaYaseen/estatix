@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { BathIcon, BedIcon, RulerIcon } from "lucide-react";
 import Image from "next/image";
 
-export default function Component() {
+export default function BuyPage() {
   const properties = useMemo(
     () => [
       {
