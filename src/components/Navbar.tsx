@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { MenuIcon } from "lucide-react";
+import { ModeToggle } from "./mode-toggle-button";
 
 const Navbar = () => {
   return (
@@ -21,9 +22,9 @@ const Navbar = () => {
         <Link href="/about" className="hover:underline" prefetch={false}>
           About
         </Link>
-        <Link href="#" className="hover:underline" prefetch={false}>
-          Darkmode
-        </Link>
+        <div className="hover:underline">
+          <ModeToggle />
+        </div>
       </nav>
       <Button variant="outline" size="sm" className="md:hidden">
         <MenuIcon className="h-6 w-6" />
