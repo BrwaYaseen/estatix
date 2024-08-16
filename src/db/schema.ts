@@ -22,6 +22,7 @@ export const propertyTable = pgTable("property", {
   area: integer("area").notNull(),
   bed: integer("bed").notNull(),
   bath: integer("bath").notNull(),
+  price: integer("price").notNull(),
   city: cityEnum("city").notNull().default("erbil"),
   userId: varchar("user_id")
     .references(() => usersTable.id)
