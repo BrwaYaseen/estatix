@@ -1,30 +1,30 @@
-import { integer, pgEnum, pgTable, text, varchar } from "drizzle-orm/pg-core";
+import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
 
-export const roleEnum = pgEnum("role", ["admin", "seller", "user"]);
+import { sql } from "drizzle-orm";
 
-export const usersTable = pgTable("users", {
-  id: varchar("id").primaryKey(),
+export const profileTable = sqliteTable("profile", {
+  id: text("id").primaryKey(),
+  userId: text("user_id").notNull(),
+  imageUrl: text("image_url"),
   name: text("name").notNull(),
-  role: roleEnum("role").default("user").notNull(),
+  email: text("email").notNull(),
+  createdAt: integer("created_at", { mode: "timestamp" }).default(
+    sql`CURRENT_TIMESTAMP`
+  ),
 });
 
-export const cityEnum = pgEnum("city", [
-  "erbil",
-  "sulaymaniyah",
-  "duhok",
-  "halabja",
-]);
+export const cities = ["erbil", "sulaymaniyah", "duhok", "halabja"] as const;
 
-export const propertyTable = pgTable("property", {
-  id: integer("id").primaryKey().generatedAlwaysAsIdentity({ startWith: 1000 }),
+export const propertyTable = sqliteTable("property", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
   name: text("name").notNull(),
   description: text("description").notNull(),
   area: integer("area").notNull(),
   bed: integer("bed").notNull(),
   bath: integer("bath").notNull(),
   price: integer("price").notNull(),
-  city: cityEnum("city").notNull().default("erbil"),
-  userId: varchar("user_id")
-    .references(() => usersTable.id)
+  city: text("city", { enum: cities }).notNull().default("erbil"),
+  userId: text("user_id")
+    .references(() => profileTable.id)
     .notNull(),
 });
