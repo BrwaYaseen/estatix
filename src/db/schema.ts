@@ -2,12 +2,15 @@ import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
 
 import { sql } from "drizzle-orm";
 
+export const userRoles = ["admin", "user"] as const;
+
 export const profileTable = sqliteTable("profile", {
   id: text("id").primaryKey(),
   userId: text("user_id").notNull(),
   imageUrl: text("image_url"),
   name: text("name").notNull(),
   email: text("email").notNull(),
+  role: text("role", { enum: userRoles }).notNull().default("user"),
   createdAt: integer("created_at", { mode: "timestamp" }).default(
     sql`CURRENT_TIMESTAMP`
   ),
