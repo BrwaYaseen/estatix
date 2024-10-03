@@ -55,20 +55,20 @@ export default function AdminPropertyPage() {
     type: "",
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSelectChange = (name, value) => {
+  const handleSelectChange = (name: string, value: string) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  /* const handleSubmit = (e: any) => {
     e.preventDefault();
     if (editingProperty) {
       setProperties(
-        properties.map((p) =>
+        properties.map((p: any) =>
           p.id === editingProperty.id ? { ...p, ...formData } : p
         )
       );
@@ -85,9 +85,9 @@ export default function AdminPropertyPage() {
       description: "",
       type: "",
     });
-  };
+  }; */
 
-  const handleEdit = (property) => {
+  const handleEdit = (property: any) => {
     setEditingProperty(property);
     setFormData(property);
   };
@@ -103,7 +103,7 @@ export default function AdminPropertyPage() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="title">Property Title</Label>
