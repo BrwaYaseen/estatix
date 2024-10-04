@@ -2,12 +2,18 @@ import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 import { propertyTable } from "@/db/schema";
 import { db } from "@/db/db";
+// Import your user profile schema or authentication utility
+import { getUserFromRequest } from "@/auth/utils"; // Adjust the import as necessary
 
 export async function GET(
   request: Request,
   { params }: { params: { id: string } }
 ) {
   try {
+    const user = getUserFromRequest(request); // Get user from request
+    if (!user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
     const id = Number(params.id);
     const property = await db.query.propertyTable.findFirst({
       where: eq(propertyTable.id, id),
@@ -35,6 +41,10 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
+    const user = getUserFromRequest(request); // Get user from request
+    if (!user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
     const id = Number(params.id);
     const deletedProperty = await db
       .delete(propertyTable)
@@ -63,6 +73,10 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   try {
+    const user = getUserFromRequest(request); // Get user from request
+    if (!user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
     const id = Number(params.id);
     const body = await request.json();
 
