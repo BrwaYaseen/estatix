@@ -3,8 +3,15 @@ import { db } from "@/db/db";
 import { eq } from "drizzle-orm";
 import { propertyTable } from "@/db/schema";
 
+// Import your user profile schema or authentication utility
+import { getUserFromRequest } from "@/auth/utils"; // Adjust the import as necessary
+
 export async function GET(request: Request) {
   try {
+    const user = getUserFromRequest(request); // Get user from request
+    if (!user) {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
     const { searchParams } = new URL(request.url);
     const id = searchParams.get("id");
 
@@ -40,6 +47,10 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
+    const user = getUserFromRequest(request); // Get user from request
+    if (!user) {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
     const body = await request.json();
 
     // Validate the required fields
