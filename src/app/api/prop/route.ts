@@ -2,44 +2,41 @@ import { NextResponse } from "next/server";
 import { db } from "@/db/db";
 import { eq } from "drizzle-orm";
 import { propertyTable } from "@/db/schema";
-
-// Import your user profile schema or authentication utility
-import { getUserFromRequest } from "@/auth/utils"; // Adjust the import as necessary
+import { getUserFromRequest } from "@/auth/utils";
 
 export async function GET(request: Request) {
   try {
-    const user = getUserFromRequest(request); // Get user from request
+    const user = await getUserFromRequest(request);
     if (!user) {
-      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
+
     const { searchParams } = new URL(request.url);
     const id = searchParams.get("id");
 
     if (id) {
-      // Fetch a single property by ID
-      const property = await db
-        .select()
-        .from(propertyTable)
-        .where(eq(propertyTable.id, parseInt(id)))
-        .execute();
+      const property = await db.query.propertyTable.findFirst({
+        where: eq(propertyTable.id, parseInt(id)),
+      });
 
-      if (property.length === 0) {
+      if (!property) {
         return NextResponse.json(
-          { message: "Property not found" },
+          { error: "Property not found" },
           { status: 404 }
         );
       }
 
-      return NextResponse.json(property[0]);
+      return NextResponse.json(property);
     } else {
-      // Fetch all properties
-      const allProperties = await db.select().from(propertyTable).execute();
+      const allProperties = await db.query.propertyTable.findMany({
+        where: eq(propertyTable.userId, user.id),
+      });
       return NextResponse.json(allProperties);
     }
   } catch (error) {
     console.error("Error fetching properties:", error);
     return NextResponse.json(
-      { message: "Internal Server Error" },
+      { error: "Internal Server Error" },
       { status: 500 }
     );
   }
@@ -47,31 +44,44 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
-    const user = getUserFromRequest(request); // Get user from request
+    const user = await getUserFromRequest(request);
     if (!user) {
-      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
+
     const body = await request.json();
 
-    // Validate the required fields
-    const requiredFields = ["title", "description", "price", "location"];
-    for (const field of requiredFields) {
-      if (!body[field]) {
-        return NextResponse.json(
-          { message: `Missing required field: ${field}` },
-          { status: 400 }
-        );
-      }
+    const requiredFields = [
+      "name",
+      "description",
+      "area",
+      "bed",
+      "bath",
+      "price",
+      "city",
+    ];
+    const missingFields = requiredFields.filter((field) => !body[field]);
+
+    if (missingFields.length > 0) {
+      return NextResponse.json(
+        { error: `Missing required fields: ${missingFields.join(", ")}` },
+        { status: 400 }
+      );
     }
 
-    // Insert the new property
-    const newProperty = await db.insert(propertyTable).values(body).returning();
+    const newProperty = await db
+      .insert(propertyTable)
+      .values({
+        ...body,
+        userId: user.id,
+      })
+      .returning();
 
     return NextResponse.json(newProperty[0], { status: 201 });
   } catch (error) {
     console.error("Error creating property:", error);
     return NextResponse.json(
-      { message: "Internal Server Error" },
+      { error: "Internal Server Error" },
       { status: 500 }
     );
   }
