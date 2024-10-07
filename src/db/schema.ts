@@ -1,4 +1,4 @@
-import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
+import { sqliteTable, text, integer, real } from "drizzle-orm/sqlite-core";
 
 import { sql } from "drizzle-orm";
 
@@ -26,6 +26,8 @@ export const propertyTable = sqliteTable("property", {
   bed: integer("bed").notNull(),
   bath: integer("bath").notNull(),
   price: integer("price").notNull(),
+  latitude: real("latitude").notNull(),
+  longitude: real("longitude").notNull(),
   city: text("city", { enum: cities }).notNull().default("erbil"),
   userId: text("user_id")
     .references(() => profileTable.id)
