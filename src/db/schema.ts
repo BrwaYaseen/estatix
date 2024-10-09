@@ -2,7 +2,7 @@ import { sqliteTable, text, integer, real } from "drizzle-orm/sqlite-core";
 
 import { sql } from "drizzle-orm";
 
-export const userRoles = ["admin", "user"] as const;
+export const userRoles = ["admin", "member", "user"] as const;
 
 export const profileTable = sqliteTable("profile", {
   id: text("id").primaryKey(),
