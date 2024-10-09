@@ -14,6 +14,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -65,39 +66,31 @@ export default function NewPropertyPage() {
   });
 
   // Define the mutation for creating a new property
-  /* const createPropertyMutation = useMutation({
+  const createPropertyMutation = useMutation({
     mutationFn: (newProperty: PropertyFormData) =>
-      fetch('/api/properties', {
-        method: 'POST',
+      fetch("/api/properties", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(newProperty),
-      }).then(res => {
-        if (!res.ok) throw new Error('Failed to create property');
+      }).then((res) => {
+        if (!res.ok) throw new Error("Failed to create property");
         return res.json();
       }),
     onSuccess: () => {
-      // Invalidate and refetch the properties query to update the list
-      queryClient.invalidateQueries({ queryKey: ['properties'] });
-      toast({
-        title: "Success",
-        description: "Property created successfully",
-      });
+      queryClient.invalidateQueries({ queryKey: ["properties"] });
+      toast.success("Property created successfully");
       form.reset();
     },
     onError: (error) => {
-      toast({
-        title: "Error",
-        description: "Failed to create property",
-        variant: "destructive",
-      });
-      console.error('Error creating property:', error);
+      toast.error("Failed to create property");
+      console.error("Error creating property:", error);
     },
   });
- */
+
   const onSubmit = (data: PropertyFormData) => {
-    /* createPropertyMutation.mutate(data); */
+    createPropertyMutation.mutate(data);
   };
 
   return (
@@ -264,9 +257,11 @@ export default function NewPropertyPage() {
               </FormItem>
             )}
           />
-          {/* <Button type="submit" disabled={createPropertyMutation.isPending}>
-            {createPropertyMutation.isPending ? "Creating..." : "Create Property"}
-          </Button> */}
+          <Button type="submit" disabled={createPropertyMutation.isPending}>
+            {createPropertyMutation.isPending
+              ? "Creating..."
+              : "Create Property"}
+          </Button>
         </form>
       </Form>
     </div>
