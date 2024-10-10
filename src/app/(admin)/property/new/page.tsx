@@ -89,8 +89,58 @@ export default function NewPropertyPage() {
     },
   });
 
+  // Define the mutation for updating a property---PLEASE FIX TYPE PLEASEEEE
+  const updatePropertyMutation = useMutation({
+    mutationFn: (updatedProperty: any) =>
+      fetch(`/api/properties/${updatedProperty.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedProperty),
+      }).then((res) => {
+        if (!res.ok) throw new Error("Failed to update property");
+        return res.json();
+      }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["properties"] });
+      toast.success("Property updated successfully");
+      form.reset();
+    },
+    onError: (error) => {
+      toast.error("Failed to update property");
+      console.error("Error updating property:", error);
+    },
+  });
+
+  // Define the mutation for deleting a property
+  const deletePropertyMutation = useMutation({
+    mutationFn: (propertyId: string) =>
+      fetch(`/api/properties/${propertyId}`, {
+        method: "DELETE",
+      }).then((res) => {
+        if (!res.ok) throw new Error("Failed to delete property");
+      }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["properties"] });
+      toast.success("Property deleted successfully");
+    },
+    onError: (error) => {
+      toast.error("Failed to delete property");
+      console.error("Error deleting property:", error);
+    },
+  });
+
   const onSubmit = (data: PropertyFormData) => {
     createPropertyMutation.mutate(data);
+  };
+
+  const handleUpdate = (data: PropertyFormData) => {
+    updatePropertyMutation.mutate(data);
+  };
+
+  const handleDelete = (propertyId: string) => {
+    deletePropertyMutation.mutate(propertyId);
   };
 
   return (
@@ -262,6 +312,18 @@ export default function NewPropertyPage() {
               ? "Creating..."
               : "Create Property"}
           </Button>
+          <Button
+            type="button"
+            onClick={() => handleUpdate(form.getValues())}
+            disabled={updatePropertyMutation.isPending}
+          >
+            {updatePropertyMutation.isPending
+              ? "Updating..."
+              : "Update Property"}
+          </Button>
+          {/*  <Button type="button" onClick={() => handleDelete(form.getValues().id)} disabled={deletePropertyMutation.isPending}>
+            {deletePropertyMutation.isPending ? "Deleting..." : "Delete Property"}
+          </Button> FIX TYPE PLEASE */}
         </form>
       </Form>
     </div>
