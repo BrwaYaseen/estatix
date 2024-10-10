@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@clerk/backend": "^0.24.0",
-    "@clerk/nextjs": "^4.6.18",
+    "@clerk/nextjs": "^5.7.2",
     "@hookform/resolvers": "^3.9.0",
     "@libsql/client": "^0.14.0",
     "@radix-ui/react-avatar": "^1.1.0",
