@@ -21,6 +21,7 @@ type Property = {
   area: number;
   bed: number;
   bath: number;
+  phoneNumber: string;
   price: number;
   city: string;
   latitude: number;

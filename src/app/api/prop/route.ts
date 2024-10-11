@@ -56,6 +56,7 @@ export async function POST(request: Request) {
       "description",
       "area",
       "bed",
+      "phoneNumber",
       "bath",
       "price",
       "city",

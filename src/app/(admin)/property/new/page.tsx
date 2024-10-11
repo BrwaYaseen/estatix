@@ -39,6 +39,7 @@ const propertySchema = z.object({
     .int()
     .positive("Number of bathrooms must be a positive integer"),
   price: z.number().positive("Price must be a positive number"),
+  phoneNumber: z.string().min(1, "Phone number is required"),
   city: z.enum(["erbil", "sulaymaniyah", "duhok", "halabja"]),
   latitude: z.number().min(-90).max(90),
   longitude: z.number().min(-180).max(180),
@@ -59,6 +60,7 @@ export default function NewPropertyPage() {
       bed: 0,
       bath: 0,
       price: 0,
+      phoneNumber: "",
       city: "erbil",
       latitude: 0,
       longitude: 0,
@@ -240,6 +242,19 @@ export default function NewPropertyPage() {
                     {...field}
                     onChange={(e) => field.onChange(parseFloat(e.target.value))}
                   />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="phoneNumber"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Phone Number</FormLabel>
+                <FormControl>
+                  <Input placeholder="Phone number" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
