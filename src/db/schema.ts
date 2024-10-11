@@ -26,6 +26,7 @@ export const propertyTable = sqliteTable("property", {
   bed: integer("bed").notNull(),
   bath: integer("bath").notNull(),
   price: integer("price").notNull(),
+  phoneNumber: text("phone_number").notNull(),
   latitude: real("latitude").notNull(),
   longitude: real("longitude").notNull(),
   city: text("city", { enum: cities }).notNull().default("erbil"),
