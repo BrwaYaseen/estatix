@@ -61,6 +61,7 @@ export default function PropertiesPage() {
             <TableHead>Price</TableHead>
             <TableHead>Area</TableHead>
             <TableHead>Beds</TableHead>
+            <TableHead>Phone Number</TableHead>
             <TableHead>Baths</TableHead>
             <TableHead>Actions</TableHead>
           </TableRow>
@@ -72,6 +73,7 @@ export default function PropertiesPage() {
               <TableCell>{property.city}</TableCell>
               <TableCell>${property.price.toLocaleString()}</TableCell>
               <TableCell>{property.area} sqm</TableCell>
+              <TableCell>{property.phoneNumber}</TableCell>
               <TableCell>{property.bed}</TableCell>
               <TableCell>{property.bath}</TableCell>
               <TableCell>
