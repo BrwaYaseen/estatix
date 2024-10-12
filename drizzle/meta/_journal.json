@@ -29,6 +29,13 @@
       "when": 1728656221323,
       "tag": "0003_pink_thor_girl",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1728736348375,
+      "tag": "0004_great_arclight",
+      "breakpoints": true
     }
   ]
 }

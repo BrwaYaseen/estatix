@@ -17,6 +17,7 @@ export const profileTable = sqliteTable("profile", {
 });
 
 export const cities = ["erbil", "sulaymaniyah", "duhok", "halabja"] as const;
+export const categories = ["buy", "rent", "apartment"] as const;
 
 export const propertyTable = sqliteTable("property", {
   id: integer("id").primaryKey({ autoIncrement: true }),
@@ -29,6 +30,7 @@ export const propertyTable = sqliteTable("property", {
   phoneNumber: text("phone_number").notNull(),
   latitude: real("latitude").notNull(),
   longitude: real("longitude").notNull(),
+  category: text("category", { enum: categories }).notNull().default("buy"),
   city: text("city", { enum: cities }).notNull().default("erbil"),
   userId: text("user_id")
     .references(() => profileTable.id)

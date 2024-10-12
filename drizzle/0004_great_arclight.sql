@@ -1,0 +1,1 @@
+ALTER TABLE `property` ADD `category` text DEFAULT 'buy' NOT NULL;
