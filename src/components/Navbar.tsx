@@ -5,31 +5,51 @@ import { ModeToggle } from "./mode-toggle-button";
 
 const Navbar = () => {
   return (
-    <header className="bg-primary text-primary-foreground py-4 px-6 flex items-center justify-between">
-      <Link href="#" className="text-xl font-bold" prefetch={false}>
-        Estatix
-      </Link>
-      <nav className="hidden md:flex items-center space-x-6">
-        <Link href="/buy" className="hover:underline" prefetch={false}>
-          Buy
+    <header className="bg-background border-b">
+      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+        <Link
+          href="#"
+          className="text-xl font-bold text-foreground"
+          prefetch={false}
+        >
+          Estatix
         </Link>
-        <Link href="/rent" className="hover:underline" prefetch={false}>
-          Rent
-        </Link>
-        <Link href="/apartment" className="hover:underline" prefetch={false}>
-          Apartment
-        </Link>
-        <Link href="/about" className="hover:underline" prefetch={false}>
-          About
-        </Link>
-        <div className="hover:underline">
+        <nav className="hidden md:flex items-center space-x-6">
+          <Link
+            href="/buy"
+            className="text-foreground hover:text-foreground/80"
+            prefetch={false}
+          >
+            Buy
+          </Link>
+          <Link
+            href="/rent"
+            className="text-foreground hover:text-foreground/80"
+            prefetch={false}
+          >
+            Rent
+          </Link>
+          <Link
+            href="/apartment"
+            className="text-foreground hover:text-foreground/80"
+            prefetch={false}
+          >
+            Apartment
+          </Link>
+          <Link
+            href="/about"
+            className="text-foreground hover:text-foreground/80"
+            prefetch={false}
+          >
+            About
+          </Link>
           <ModeToggle />
-        </div>
-      </nav>
-      <Button variant="outline" size="sm" className="md:hidden">
-        <MenuIcon className="h-6 w-6" />
-        <span className="sr-only">Toggle navigation</span>
-      </Button>
+        </nav>
+        <Button variant="outline" size="icon" className="md:hidden">
+          <MenuIcon className="h-6 w-6" />
+          <span className="sr-only">Toggle navigation</span>
+        </Button>
+      </div>
     </header>
   );
 };
