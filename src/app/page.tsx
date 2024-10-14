@@ -14,12 +14,12 @@ export default function Component() {
   return (
     <div className="flex flex-col min-h-[100dvh]">
       <main className="flex-1">
-        <section className="bg-[url('/hero-image.jpg')] bg-cover bg-center h-[60vh] flex flex-col items-center justify-center text-white">
+        <section className="bg-[url('/hero-image.jpg')] bg-cover bg-center h-[60vh] flex flex-col items-center justify-center text-background dark:text-background">
           <h1 className="text-4xl font-bold mb-4">Find Your Dream Home</h1>
           <p className="text-lg mb-8">
             Search for properties in your desired location
           </p>
-          <form className="bg-white rounded-lg shadow-lg p-6 w-full max-w-3xl flex items-center space-x-4">
+          <form className="bg-background dark:bg-background rounded-lg shadow-lg p-6 w-full max-w-3xl flex items-center space-x-4">
             <Input
               type="text"
               placeholder="Enter a city, address, or ZIP code"
@@ -36,12 +36,11 @@ export default function Component() {
                 <div className="p-4">
                   <Card>
                     <Image
-                      src="/placeholder.svg"
+                      src="/api/placeholder/400/250"
                       width={400}
                       height={250}
                       alt="Property 1"
                       className="rounded-t-lg object-cover"
-                      style={{ aspectRatio: "400/250", objectFit: "cover" }}
                     />
                     <CardContent className="p-4">
                       <h3 className="text-xl font-bold mb-2">
@@ -62,12 +61,11 @@ export default function Component() {
                 <div className="p-4">
                   <Card>
                     <Image
-                      src="/placeholder.svg"
+                      src="/api/placeholder/400/250"
                       width={400}
                       height={250}
                       alt="Property 2"
                       className="rounded-t-lg object-cover"
-                      style={{ aspectRatio: "400/250", objectFit: "cover" }}
                     />
                     <CardContent className="p-4">
                       <h3 className="text-xl font-bold mb-2">
@@ -88,12 +86,11 @@ export default function Component() {
                 <div className="p-4">
                   <Card>
                     <Image
-                      src="/placeholder.svg"
+                      src="/api/placeholder/400/250"
                       width={400}
                       height={250}
                       alt="Property 3"
                       className="rounded-t-lg object-cover"
-                      style={{ aspectRatio: "400/250", objectFit: "cover" }}
                     />
                     <CardContent className="p-4">
                       <h3 className="text-xl font-bold mb-2">
@@ -120,12 +117,11 @@ export default function Component() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             <Card>
               <Image
-                src="/placeholder.svg"
+                src="/api/placeholder/400/250"
                 width={400}
                 height={250}
                 alt="Neighborhood 1"
                 className="rounded-t-lg object-cover"
-                style={{ aspectRatio: "400/250", objectFit: "cover" }}
               />
               <CardContent className="p-4">
                 <h3 className="text-xl font-bold mb-2">San Francisco</h3>
@@ -136,12 +132,11 @@ export default function Component() {
             </Card>
             <Card>
               <Image
-                src="/placeholder.svg"
+                src="/api/placeholder/400/250"
                 width={400}
                 height={250}
                 alt="Neighborhood 2"
                 className="rounded-t-lg object-cover"
-                style={{ aspectRatio: "400/250", objectFit: "cover" }}
               />
               <CardContent className="p-4">
                 <h3 className="text-xl font-bold mb-2">Oakland</h3>
@@ -152,12 +147,11 @@ export default function Component() {
             </Card>
             <Card>
               <Image
-                src="/placeholder.svg"
+                src="/api/placeholder/400/250"
                 width={400}
                 height={250}
                 alt="Neighborhood 3"
                 className="rounded-t-lg object-cover"
-                style={{ aspectRatio: "400/250", objectFit: "cover" }}
               />
               <CardContent className="p-4">
                 <h3 className="text-xl font-bold mb-2">San Jose</h3>
@@ -183,12 +177,11 @@ export default function Component() {
             </div>
             <div>
               <Image
-                src="/placeholder.svg"
+                src="/api/placeholder/600/400"
                 width={600}
                 height={400}
                 alt="About Us"
                 className="rounded-lg object-cover"
-                style={{ aspectRatio: "600/400", objectFit: "cover" }}
               />
             </div>
           </div>
