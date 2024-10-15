@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
 import { db } from "@/db/db";
-import { eq } from "drizzle-orm";
+import { eq, and } from "drizzle-orm";
 import { propertyTable } from "@/db/schema";
 import { getUserFromRequest } from "@/lib/get-user-from-request";
+import { SQL } from "drizzle-orm";
 
 export async function GET(request: Request) {
   try {
@@ -13,6 +14,7 @@ export async function GET(request: Request) {
 
     const { searchParams } = new URL(request.url);
     const id = searchParams.get("id");
+    const category = searchParams.get("category");
 
     if (id) {
       const property = await db.query.propertyTable.findFirst({
@@ -28,10 +30,19 @@ export async function GET(request: Request) {
 
       return NextResponse.json(property);
     } else {
-      const allProperties = await db.query.propertyTable.findMany({
-        where: eq(propertyTable.userId, user.id),
+      let whereConditions: SQL[] = [eq(propertyTable.userId, user.id)];
+
+      if (category) {
+        whereConditions.push(
+          eq(propertyTable.category, category as "buy" | "rent" | "apartment")
+        );
+      }
+
+      const properties = await db.query.propertyTable.findMany({
+        where: and(...whereConditions),
       });
-      return NextResponse.json(allProperties);
+
+      return NextResponse.json(properties);
     }
   } catch (error) {
     console.error("Error fetching properties:", error);
@@ -60,6 +71,7 @@ export async function POST(request: Request) {
       "bath",
       "price",
       "city",
+      "category", // Added category to required fields
     ];
     const missingFields = requiredFields.filter((field) => !body[field]);
 
