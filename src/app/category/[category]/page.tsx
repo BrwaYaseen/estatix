@@ -2,6 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -26,34 +27,37 @@ type Property = {
   city: string;
   latitude: number;
   longitude: number;
+  category: string;
 };
 
-export default function PropertiesPage() {
-  // Use React Query to fetch properties
+export default function CategoryPropertiesPage() {
+  const { category } = useParams();
+
+  // Use React Query to fetch properties by category
   const {
     data: properties,
     isLoading,
     error,
   } = useQuery<Property[]>({
-    queryKey: ["properties"],
+    queryKey: ["properties", category],
     queryFn: () =>
-      fetch("/api/properties").then((res) => {
+      fetch(`/api/properties?category=${category}`).then((res) => {
         if (!res.ok) throw new Error("Failed to fetch properties");
         return res.json();
       }),
   });
 
   if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>An error occurred: {error.message}</div>;
+  if (error) return <div>An error occurred: {(error as Error).message}</div>;
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Properties</h1>
+      <h1 className="text-3xl font-bold mb-6">Properties in {category}</h1>
       <Link href="/properties/new" passHref>
         <Button className="mb-4">Add New Property</Button>
       </Link>
       <Table>
-        <TableCaption>A list of all properties</TableCaption>
+        <TableCaption>A list of properties in {category}</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead>Name</TableHead>
@@ -61,8 +65,8 @@ export default function PropertiesPage() {
             <TableHead>Price</TableHead>
             <TableHead>Area</TableHead>
             <TableHead>Beds</TableHead>
-            <TableHead>Phone Number</TableHead>
             <TableHead>Baths</TableHead>
+            <TableHead>Phone Number</TableHead>
             <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
@@ -73,9 +77,9 @@ export default function PropertiesPage() {
               <TableCell>{property.city}</TableCell>
               <TableCell>${property.price.toLocaleString()}</TableCell>
               <TableCell>{property.area} sqm</TableCell>
-              <TableCell>{property.phoneNumber}</TableCell>
               <TableCell>{property.bed}</TableCell>
               <TableCell>{property.bath}</TableCell>
+              <TableCell>{property.phoneNumber}</TableCell>
               <TableCell>
                 <Link href={`/properties/${property.id}`} passHref>
                   <Button variant="outline">View</Button>
