@@ -47,6 +47,15 @@ export default function CategoryPropertiesPage() {
       }),
   });
 
+  /*   const capitalizeFirstLetter = (string: string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+  
+  // Then in your JSX:
+  <h1 className="text-3xl font-bold mb-6">
+    Properties in {capitalizeFirstLetter(category as string)}
+  </h1> */
+
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>An error occurred: {(error as Error).message}</div>;
 

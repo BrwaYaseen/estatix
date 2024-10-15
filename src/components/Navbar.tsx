@@ -8,7 +8,7 @@ const Navbar = () => {
     <header className="bg-background border-b">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link
-          href="#"
+          href="/"
           className="text-xl font-bold text-foreground"
           prefetch={false}
         >
@@ -16,21 +16,21 @@ const Navbar = () => {
         </Link>
         <nav className="hidden md:flex items-center space-x-6">
           <Link
-            href="/buy"
+            href="/category/buy"
             className="text-foreground hover:text-foreground/80"
             prefetch={false}
           >
             Buy
           </Link>
           <Link
-            href="/rent"
+            href="/category/rent"
             className="text-foreground hover:text-foreground/80"
             prefetch={false}
           >
             Rent
           </Link>
           <Link
-            href="/apartment"
+            href="/category/apartment"
             className="text-foreground hover:text-foreground/80"
             prefetch={false}
           >
